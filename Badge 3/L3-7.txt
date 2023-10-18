@@ -1,0 +1,13 @@
+use role accountadmin;
+
+-- set your worksheet drop lists to the location of your GRADER function 
+-- you can use code or you can manually set the drop lists 
+-- DO NOT EDIT BELOW THIS LINE 
+select grader(step, (actual = expected), actual, expected, description) as graded_results from( 
+SELECT 'SMEW03' as step 
+ ,(select row_count 
+   from INTL_DB.INFORMATION_SCHEMA.TABLES  
+   where table_name = 'INT_STDS_ORG_3661') as actual 
+ , 249 as expected 
+ ,'ISO Table Loaded' as description 
+);

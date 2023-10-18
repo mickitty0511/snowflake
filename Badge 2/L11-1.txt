@@ -1,0 +1,3 @@
+use role accountadmin;
+
+show stages in account;

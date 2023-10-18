@@ -1,0 +1,13 @@
+use role accountadmin;
+use schema util_db.public;
+
+create function sum_mystery_bag_vars (var1 number, var2 number, var3 number)
+    returns number as 'select var1+var2+var3';
+
+select sum_mystery_bag_vars(12,36,204);
+
+set eeny = 4;
+set meeny = 67.2;
+set miney_mo = -39;
+
+select sum_mystery_bag_vars($eeny, $meeny, $miney_mo);

@@ -1,0 +1,12 @@
+use role accountadmin;
+use schema util_db.public;
+
+-- Set your worksheet drop lists
+-- DO NOT EDIT ANYTHING BELOW THIS LINE
+select GRADER(step, (actual = expected), actual, expected, description) as graded_results from (
+  SELECT 'DABW06' as step
+ ,( select count(distinct METADATA$FILENAME) 
+   from @demo_db.public.my_internal_named_stage) as actual
+ , 3 as expected
+ ,'I PUT 3 files!' as description
+);

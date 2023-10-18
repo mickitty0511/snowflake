@@ -1,0 +1,13 @@
+use role accountadmin;
+use schema util_db.public;
+
+set var_text = 'bUt mOm i wAsHeD tHe dIsHes yEsTeRdAy';
+
+-- Set your worksheet drop lists
+-- DO NOT EDIT ANYTHING BELOW THIS LINE
+select GRADER(step, (actual = expected), actual, expected, description) as graded_results from (
+ SELECT 'DABW05' as step
+ ,( select hash(neutralize_whining('bUt mOm i wAsHeD tHe dIsHes yEsTeRdAy'))) as actual
+ , -4759027801154767056 as expected
+ ,'WHINGE UDF Works' as description
+);

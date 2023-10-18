@@ -1,0 +1,45 @@
+-- Create Table INT_STDS_ORG_3661
+CREATE OR REPLACE TABLE INTL_DB.PUBLIC.INT_STDS_ORG_3661 
+(ISO_COUNTRY_NAME varchar(100), 
+ COUNTRY_NAME_OFFICIAL varchar(200), 
+ SOVEREIGNTY varchar(40), 
+ ALPHA_CODE_2DIGIT varchar(2), 
+ ALPHA_CODE_3DIGIT varchar(3), 
+ NUMERIC_COUNTRY_CODE integer,
+ ISO_SUBDIVISION varchar(15), 
+ INTERNET_DOMAIN_CODE varchar(10)
+);
+
+-- Create a File Format to Load the Table
+CREATE OR REPLACE FILE FORMAT INTL_DB.PUBLIC.PIPE_DBLQUOTE_HEADER_CR 
+  TYPE = 'CSV' 
+  COMPRESSION = 'AUTO' 
+  FIELD_DELIMITER = '|' 
+  RECORD_DELIMITER = '\r' 
+  SKIP_HEADER = 1 
+  FIELD_OPTIONALLY_ENCLOSED_BY = '\042' 
+  TRIM_SPACE = FALSE 
+  ERROR_ON_COLUMN_COUNT_MISMATCH = TRUE 
+  ESCAPE = 'NONE' 
+  ESCAPE_UNENCLOSED_FIELD = '\134'
+  DATE_FORMAT = 'AUTO' 
+  TIMESTAMP_FORMAT = 'AUTO' 
+  NULL_IF = ('\\N');
+
+-- create a external stage
+create stage util_db.public.like_a_window_into_an_s3_bucket
+url = 's3://uni-lab-files';
+
+
+-- show files from the external stage
+use schema util_db.public;
+list @like_a_window_into_an_s3_bucket;
+
+
+--  Load the ISO Table Using Your File Format
+use role accountadmin;
+use schema util_db.public; -- to use the external stage mounted on a designated database
+copy into intl_db.public.INT_STDS_ORG_3661
+from @like_a_window_into_an_s3_bucket
+files = ('smew/ISO_Countries_UTF8_pipe.csv')
+file_format = ( format_name = 'intl_db.public.PIPE_DBLQUOTE_HEADER_CR');

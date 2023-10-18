@@ -1,0 +1,13 @@
+use role accountadmin;
+use schema util_db.public;
+
+-- Set your worksheet drop lists
+
+-- DO NOT EDIT ANYTHING BELOW THIS LINE
+select GRADER(step, (actual = expected), actual, expected, description) as graded_results from (
+  SELECT 'DABW03' as step
+ ,( select sum(round(nutritions_sugar)) 
+   from PC_RIVERY_DB.PUBLIC.FRUITYVICE) as actual
+ , 35 as expected
+ ,'Fruityvice table is perfectly loaded' as description
+);

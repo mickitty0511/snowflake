@@ -1,0 +1,12 @@
+use role accountadmin;
+use schema demo_db.public;
+
+set mystery_bag = 'What is in here?';
+set mystery_bag = 'This bag is empty!!';
+
+select $mystery_bag;
+
+set var1 = 2;
+set var2 = 5;
+set var3 = 7;
+select $var1 + $var2 + $var3;

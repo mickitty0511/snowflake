@@ -1,0 +1,16 @@
+use role accountadmin;
+use schema util_db.public;
+
+set alternating_caps_phrase = 'aLtErNaTiNg CaPs!';
+set alternating_caps_phrase = 'wHy ArE yOu lIkE tHiS?';
+select $alternating_caps_phrase;
+
+select initcap($alternating_caps_phrase);
+
+set var_text = 'wHy ArE yOu lIkE tHiS?';
+
+create function NEUTRALIZE_WHINING(var_text text)
+    returns text as 'select initcap($var_text)';
+
+
+select NEUTRALIZE_WHINING($var_text);

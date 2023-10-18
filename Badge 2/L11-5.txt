@@ -1,0 +1,5 @@
+use role accountadmin;
+use schema demo_db.public;
+
+list @my_internal_named_stage;
+select $1 from @my_internal_named_stage/dora1.txt.gz;

@@ -1,0 +1,26 @@
+use role accountadmin;
+use schema util_db.public;
+
+set cus_var1 = -10.5;
+set cus_var2 = 2;
+set cus_var3 = 1000;
+
+select sum_mystery_bag_vars(
+    $cus_var1
+    , $cus_var2
+    , $cus_var3
+);
+
+-- Set your worksheet drop lists
+-- Set these local variables according to the instructions
+set this = -10.5;
+set that = 2;
+set the_other = 1000;
+
+-- DO NOT EDIT ANYTHING BELOW THIS LINE
+select GRADER(step, (actual = expected), actual, expected, description) as graded_results from (
+  SELECT 'DABW04' as step
+ ,( select util_db.public.sum_mystery_bag_vars($this,$that,$the_other)) as actual
+ , 991.5 as expected
+ ,'Mystery Bag Function Output' as description
+);

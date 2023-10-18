@@ -1,0 +1,11 @@
+use role accountadmin;
+use schema util_db.public;
+
+select GRADER(step, (actual = expected), actual, expected, description) as graded_results from (
+  SELECT 'DABW01' as step
+ ,( select count(*) 
+   from PC_RIVERY_DB.INFORMATION_SCHEMA.SCHEMATA 
+   where schema_name ='PUBLIC') as actual
+ , 1 as expected
+ ,'Rivery is set up' as description
+);

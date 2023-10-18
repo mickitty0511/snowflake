@@ -1,0 +1,14 @@
+use role accountadmin;
+
+-- set your worksheet drop lists to the location of your GRADER function using commands
+
+--DO NOT EDIT BELOW THIS LINE
+select grader(step, (actual = expected), actual, expected, description) as graded_results from( 
+ SELECT 'SMEW01' as step
+ ,(select count(*) 
+   from snowflake.account_usage.databases
+   where database_name = 'INTL_DB' 
+   and deleted is null) as actual
+ , 1 as expected
+ ,'Created INTL_DB' as description
+ );

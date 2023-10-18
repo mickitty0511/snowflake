@@ -1,0 +1,19 @@
+-- where did you put the function?
+show user functions in account;
+
+-- did you put it here?
+select * 
+from snowflake.account_usage.functions
+where function_name = 'GRADER'
+and function_catalog = 'UTIL_DB'
+and function_owner = 'ACCOUNTADMIN';
+
+-- set your worksheet drop lists to the location of your GRADER function
+
+--DO NOT EDIT BELOW THIS LINE - Don't add or take away spaces, do change 'from' to 'FROM' - NO EDITS AT ALL
+select GRADER(step,(actual = expected), actual, expected, description) as graded_results from (
+SELECT 'DORA_IS_WORKING' as step
+ ,(select 223 ) as actual
+ ,223 as expected
+ ,'Dora is working!' as description
+); 
